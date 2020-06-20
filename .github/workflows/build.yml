@@ -7,12 +7,16 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@master
+      - name: Install graalvm
+        uses: DeLaGuardo/setup-graalvm@3
+        with:
+          graalvm-version: '20.0.0.java11'
+      - name: Install native-image
+        run: gu install native-image
+      - name: Set version
+        run: ./mvnw versions:set -DnewVersion="${{ github.event.release.tag_name }}"
       - name: Build native executable
-        uses: maxday/quarkus-native-build-docker-action@1
-        with:
-          outputName: app-runner
+        run: ./mvnw package -Dnative
       - name: Upload native executable
-        uses: actions/upload-artifact@v1
-        with:
-          name: native-executable
-          path: app-runner
+        id: upload-native-executable
+        uses: actions/upload-release-asset@v1
