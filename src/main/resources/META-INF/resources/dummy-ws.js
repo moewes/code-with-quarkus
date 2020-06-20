@@ -1,4 +1,4 @@
-import "/opendxp-container.js"
+import "./opendxp-container.js"
 
 class DummyOne extends HTMLElement {
 

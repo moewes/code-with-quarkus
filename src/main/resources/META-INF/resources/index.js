@@ -19,7 +19,7 @@ async function setupRouter() {
 
 async function fetchLinks() {
 
-  const res = await fetch("/links");
+  const res = await fetch("./links");
   const json = await res.json();
 
   const main = document.querySelector('main');

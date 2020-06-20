@@ -16,6 +16,18 @@ public class ExampleResource {
     public Multi<String> hello() {
 
         ArrayList hello =  new ArrayList();
+        hello.add( PortalLink.builder().text("Home").link("./portal").build());
+        hello.add( PortalLink.builder().text("Users").link("./portal/users").build());
+
+        return Multi.createFrom().iterable(hello);
+    }
+
+    @GET
+    @Path("/context")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Multi<String> context() {
+
+        ArrayList hello =  new ArrayList();
         hello.add( PortalLink.builder().text("Home").link("/portal").build());
         hello.add( PortalLink.builder().text("Users").link("/portal/users").build());
 

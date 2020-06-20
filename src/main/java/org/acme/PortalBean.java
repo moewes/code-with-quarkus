@@ -2,9 +2,13 @@ package org.acme;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @ApplicationScoped
 public class PortalBean {
+
+  @ConfigProperty(name = "proxypath", defaultValue = "/")
+  String path;
 
   private String page = "Hallo from Bean";
 
@@ -17,11 +21,11 @@ public class PortalBean {
         + "</head>"
         + "<body>"
         + "<main>\n"
-        + "  <a href=\"/portal\">Home</a>\n"
-        + "  <a href=\"/portal/users\">Users</a>\n"
+        + "  <a href=\"" + path + "portal\">Home</a>\n"
+        + "  <a href=\"" + path + "portal/users\">Users</a>\n"
         + "  <div id=\"outlet\"></div>\n"
         + "</main>"
-        + "<script src=\"/index.js\" type=\"module\"></script>"
+        + "<script src=\"" + path + "index.js\" type=\"module\"></script>"
         + "</body>"
         + "</html>";
   }
